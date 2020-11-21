@@ -5,6 +5,8 @@ var todoCountSpan = document.querySelector("#todo-count");
 
 var todos = ["Learn HTML", "Learn CSS", "Learn JavaScript"];
 
+
+
 function renderTodos (){
     //clear existing todos
     todoList.innerHTML = ""
@@ -25,6 +27,9 @@ function renderTodos (){
     }
 }
 
+
+
+
 function addTodo(event){
     event.preventDefault()
     //get todoInput value
@@ -40,6 +45,19 @@ function addTodo(event){
 
 }
 
+function removeTodo(event){
+    var target = event.target
+    if (target.matches("button")){    
+        //find index from li
+        var index = parseInt(target.parentNode.getAttribute("data-index"))
+        //remove the todo from todos array
+        todos.splice(index, 1)
+        //re-render todos
+        renderTodos()
+    }   
+}
+
 todoForm.addEventListener("submit", addTodo)
+todoList.addEventListener("click", removeTodo)
 
 renderTodos()
