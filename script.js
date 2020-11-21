@@ -14,6 +14,12 @@ function renderTodos (){
         var li = document.createElement("li")
         //add todo text to li
         li.innerText = todos[i]
+        //add data-index attribute
+        li.setAttribute("data-index", i)
+        //create button
+        var button = document.createElement("button")
+        button.innerText = "Complete"
+        li.appendChild(button)
         //append li to ul
         todoList.appendChild(li)
     }
