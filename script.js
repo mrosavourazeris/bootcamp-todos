@@ -3,7 +3,7 @@ var todoForm = document.querySelector("#todo-form");
 var todoList = document.querySelector("#todo-list");
 var todoCountSpan = document.querySelector("#todo-count");
 
-var todos = ["Learn HTML", "Learn CSS", "Learn JavaScript"];
+var todos = JSON.parse(localStorage.getItem("todos")) || []
 
 
 
@@ -27,9 +27,6 @@ function renderTodos (){
     }
 }
 
-
-
-
 function addTodo(event){
     event.preventDefault()
     //get todoInput value
@@ -38,11 +35,10 @@ function addTodo(event){
          //push text into todos
     todos.push(newTodo)
     todoInput.value = null
+    localStorage.setItem("todos", JSON.stringify(todos))
     //call renderTodos
     renderTodos()
     }
-
-
 }
 
 function removeTodo(event){
@@ -52,10 +48,13 @@ function removeTodo(event){
         var index = parseInt(target.parentNode.getAttribute("data-index"))
         //remove the todo from todos array
         todos.splice(index, 1)
+        localStorage.setItem("todos", JSON.stringify(todos))
         //re-render todos
         renderTodos()
     }   
 }
+
+
 
 todoForm.addEventListener("submit", addTodo)
 todoList.addEventListener("click", removeTodo)
